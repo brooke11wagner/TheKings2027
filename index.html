@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Joseph &amp; Savannah Save the Date</title>
+<meta name="description" content="Save the date · Joseph King &amp; Savannah Ware · July 24, 2027">
+<link rel="icon" href="assets/swans.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Forum&family=Pinyon+Script&display=swap">
+
+<script>
+/* =====================================================================
+   SAVE THE DATE SETTINGS — edit these, nothing else needs to change.
+   ===================================================================== */
+const SAVE_THE_DATE = {
+  // Paste the wedding website address here once it's live, e.g. "https://josephandsavannah.com".
+  // Leave "" and the button reads "Website coming soon" and can't be tapped.
+  // If this page lives inside the website folder, "index.html" works too.
+  websiteUrl: "",
+  place: "Swan Harbor Farm · Havre de Grace, Maryland",   // shown under the card; "" hides the line
+  calendarLocation: "Swan Harbor Farm, 401 Oakington Rd, Havre de Grace, MD",
+  note: "Formal invitation to follow",
+  eyebrow: "Save the Date",
+  names: "Joseph & Savannah",          // gold script on the card
+  envelopeNames: "Joseph and Savannah", // script on the envelope
+  dateShort: "07 · 24 · 2027",
+  dateLong: "Saturday, July 24, 2027",
+  // Used by "Add to calendar"
+  calendarTitle: "Joseph & Savannah's Wedding",
+  calendarStart: "20270724",   // YYYYMMDD
+  calendarEnd:   "20270725"    // the day after (all-day event)
+};
+</script>
+
+<style>
+/* Layout: a pale-yellow envelope on the light-blue lotus print; the photo card is drawn out, lifts clear, and settles in front. */
+:root{
+  color-scheme: light;
+  --ground:#F8F3EA;     /* cream under the blue florals */
+  --env:#F6F1C6;        /* pale yellow envelope paper */
+  --env-2:#EFE8B3;
+  --env-side:#EDE5A9;
+  --env-low:#F4EEBF;
+  --env-low-2:#F8F4D3;
+  --env-in:#D9D09A;     /* inside of the envelope */
+  --sky:#F4F3F1;        /* the photo's sky, extended above it */
+  --sage-deep:#4B5236;
+  --gold:linear-gradient(110deg,#6E4F17 0%,#93702A 18%,#C39A42 30%,#E2C274 37%,#A67C2C 45%,#6E5220 57%,#9C7630 70%,#D4B060 80%,#7A5A1E 100%);
+  --ink:#454A34;        /* body text, darkened sage */
+  --sage:#5F6647;
+  --head:#3F7890;       /* script headings, blue */
+  --berry:#6B4A33;      /* buttons, brown */
+  --berry-deep:#523624;
+  --wax:#5D8BB0;        /* blue wax */
+  --wax-lite:#9CC0DA;
+  --wax-deep:#2F5676;
+  --lace:#F8F4EE;
+  --script:"Pinyon Script","Snell Roundhand",cursive;
+  --caps:"Forum","Cormorant Garamond","Times New Roman",serif;
+  --body:"Cormorant Garamond","Garamond","Times New Roman",serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0; color:var(--ink); font-family:var(--body); font-size:1.15rem; line-height:1.5; background:var(--ground); -webkit-font-smoothing:antialiased; overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0; background:url(assets/lotus-sky.webp) center 30% / cover no-repeat; pointer-events:none}
+.page{position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding-inline:16px; padding-block:clamp(100px,20vw,190px) 48px; gap:clamp(18px,3vw,26px)}
+
+/* ---------- Scene: envelope and final card share one grid cell ---------- */
+.scene{display:grid; width:min(640px,100%); max-width:100%; aspect-ratio:4/3}
+.scene > *{grid-area:1/1}
+.env-wrap{position:relative; align-self:end; justify-self:center; width:86%; margin-bottom:3%; cursor:pointer; border:0; padding:0; background:none; font:inherit; color:inherit;
+  perspective:1400px; -webkit-tap-highlight-color:transparent}
+.env-wrap:focus-visible{outline:2px solid var(--head); outline-offset:8px; border-radius:6px}
+.env{position:relative; width:100%; aspect-ratio:1.4; max-width:100%; perspective:1100px; perspective-origin:50% 0}
+
+/* inside of the envelope: liner at the top, shading toward the fold */
+.env-back{position:absolute; inset:0; border-radius:4px; background:var(--env-in);
+  box-shadow:0 18px 30px rgba(60,72,90,.2), 0 3px 6px rgba(60,72,90,.14)}
+.env-back::before{content:""; position:absolute; left:3%; right:3%; top:3%; height:60%; clip-path:polygon(0 0,100% 0,100% 45%,50% 100%,0 45%);
+  background:#E6EEF3 url(assets/lotus-blue.webp) center / 120% auto}
+.env-back::after{content:""; position:absolute; inset:0; border-radius:4px; background:linear-gradient(180deg,rgba(255,255,255,0) 40%,rgba(70,60,40,.22) 100%)}
+
+.pocket,.pocket-low,.pocket-shade,.flap,.flap-face,.flap-shade{position:absolute}
+.pocket-shade{inset:0; z-index:3; background:rgba(90,80,20,.18); clip-path:polygon(0 -2%,50% 52%,100% -2%,100% 100%,0 100%); filter:blur(3px)}
+.pocket{inset:0; z-index:3; background:var(--env-side); clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%); border-radius:4px}
+.pocket-low{inset:0; z-index:3; background:linear-gradient(180deg,var(--env-low-2),var(--env-low)); clip-path:polygon(0 100%,50% 47%,100% 100%); border-radius:4px}
+.pocket-note{position:absolute; z-index:4; left:0; right:0; bottom:6%; text-align:center; pointer-events:none}
+.pocket-note .from{font-family:var(--caps); letter-spacing:.24em; text-transform:uppercase; font-size:clamp(.55rem,1.5vw,.78rem); color:var(--sage)}
+.pocket-note .who{font-family:var(--script); color:var(--head); font-size:clamp(1.3rem,4.2vw,2.3rem); line-height:1.15}
+
+.flap{left:0; right:0; top:0; height:58%; z-index:5; transform-origin:50% 0; transform-style:preserve-3d;
+  transition:transform .8s cubic-bezier(.55,.05,.3,1) .3s, z-index 0s .72s}
+.flap-shade{left:0; right:0; top:0; height:61%; z-index:4; background:rgba(90,80,20,.2); clip-path:polygon(0 0,100% 0,50% 100%); filter:blur(3px); transition:opacity .3s ease .3s}
+.flap-face{inset:0; clip-path:polygon(0 0,100% 0,50% 100%); backface-visibility:hidden; -webkit-backface-visibility:hidden}
+.flap-face.out{background:linear-gradient(180deg,var(--env) 0%,var(--env-2) 100%)}
+.flap-face.in{clip-path:polygon(0 100%,100% 100%,50% 0); transform:rotateX(180deg); background:#E6EEF3 url(assets/lotus-blue.webp) center / 140% auto}
+.flap-face.in::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg,rgba(40,60,80,.12),rgba(255,255,255,.2))}
+
+/* heart-shaped blue wax seal */
+.seal{position:absolute; z-index:6; left:50%; top:57%; width:clamp(60px,14vw,98px); transform:translate(-50%,-50%); filter:drop-shadow(0 2px 3px rgba(30,50,70,.4))}
+.seal svg{display:block; width:100%; height:auto; overflow:visible}
+.seal .mono{font-family:var(--script); fill:#EAF2F8; font-size:30px}
+.env-wrap:hover .seal{transform:translate(-50%,-50%) scale(1.05); transition:transform .3s ease}
+
+/* ---------- Card: the photo, with the sky carried up above it ---------- */
+.slot{position:absolute; left:6%; right:6%; top:5%; z-index:2}
+.card{position:relative; width:100%; aspect-ratio:4/3; max-width:100%; container-type:inline-size; border-radius:3px; overflow:hidden; background:var(--sky);
+  box-shadow:0 1px 2px rgba(67,48,34,.22)}
+.card img{position:absolute; left:0; bottom:0; width:100%; height:auto; max-width:none; display:block}
+.front-text{position:absolute; left:0; right:0; top:4.2cqw; text-align:center; padding-inline:4cqw}
+.eyebrow{font-family:var(--caps); color:var(--sage-deep); text-transform:uppercase; letter-spacing:.32em; font-size:max(10px,2.3cqw); padding-left:.32em}
+.gold{font-family:var(--script); font-size:8cqw; line-height:1.25; white-space:nowrap;
+  background:var(--gold); background-size:300% 100%; background-position:var(--shine,50%) 50%;
+  -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 1px rgba(70,48,12,.35)); padding:0 .4em; transition:background-position 2.4s ease}
+.stage .gold{--shine:12%}
+.card .date{font-family:var(--caps); color:var(--sage-deep); letter-spacing:.34em; font-size:max(10px,2.3cqw); padding-left:.34em}
+.stage .card{box-shadow:0 2px 4px rgba(60,72,90,.14), 0 22px 44px rgba(60,72,90,.24)}
+.details{text-align:center; display:grid; gap:2px}
+.details .when{font-family:var(--caps); color:var(--berry); text-transform:uppercase; letter-spacing:.16em; font-size:.95rem}
+.details .where{color:var(--ink); font-size:1.1rem}
+.details .note{font-style:italic; color:var(--sage)}
+
+/* ---------- Stage (final card) ---------- */
+.stage{align-self:start; width:100%}
+
+/* ---------- Under the scene ---------- */
+.hint{font-family:var(--caps); text-transform:uppercase; letter-spacing:.24em; font-size:.85rem; color:var(--sage); text-align:center; margin:0}
+.hint .dot{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--head); margin-right:.8em; vertical-align:.15em; animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.actions{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; animation:rise .6s ease both}
+@keyframes rise{from{opacity:0; transform:translateY(8px)}}
+.btn{font-family:var(--caps); letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; padding:12px 24px; border-radius:999px; border:1px solid var(--berry);
+  background:var(--berry); color:var(--lace); text-decoration:none; cursor:pointer; display:inline-flex; align-items:center; gap:8px; line-height:1.2}
+.btn:hover{background:var(--berry-deep)}
+.btn.ghost{background:color-mix(in srgb,var(--ground) 70%,transparent); color:var(--sage); border-color:var(--sage)}
+.btn.ghost:hover{background:var(--ground)}
+.btn.soon{background:color-mix(in srgb,var(--ground) 70%,transparent); color:var(--sage); border-color:color-mix(in srgb,var(--sage) 45%,transparent); cursor:default}
+.replay{font-family:var(--body); font-style:italic; color:var(--berry); background:none; border:0; font-size:1.05rem; cursor:pointer; padding:4px 8px; text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--head); outline-offset:3px}
+
+/* ---------- Opening ---------- */
+.open .flap{transform:rotateX(180deg); z-index:1}
+.open .flap-shade{opacity:0}
+.instant, .instant *{transition:none!important}
+@media (prefers-reduced-motion: reduce){ *,*::before,*::after{transition:none!important; animation:none!important} }
+</style>
+</head>
+<body>
+
+<main class="page">
+  <div class="scene" id="scene">
+    <button class="env-wrap" id="env" type="button" aria-label="Open the envelope">
+      <div class="env">
+        <div class="env-back"></div>
+        <div class="slot" id="slot">
+          <div class="card" id="card">
+            <img src="assets/photos/photo-15.jpg" alt="Savannah leading Joseph by the hand, running through a field of wildflowers at sunset">
+            <div class="front-text">
+              <div class="eyebrow" id="c-eyebrow">Save the Date</div>
+              <div class="gold" id="c-names">Joseph &amp; Savannah</div>
+              <div class="date" id="c-date">07 · 24 · 2027</div>
+            </div>
+          </div>
+        </div>
+        <div class="pocket-shade"></div>
+        <div class="pocket"></div>
+        <div class="pocket-low"></div>
+        <div class="pocket-note">
+          <div class="from">A little note from</div>
+          <div class="who" id="env-names">Joseph and Savannah</div>
+        </div>
+        <div class="flap-shade"></div>
+        <div class="flap"><div class="flap-face out"></div><div class="flap-face in"></div></div>
+        <div class="seal" id="seal" aria-hidden="true">
+          <svg viewBox="0 0 100 92">
+            <defs>
+              <radialGradient id="wax" cx="36%" cy="30%" r="80%">
+                <stop offset="0" stop-color="#A9CBE3"/><stop offset=".45" stop-color="#5D8BB0"/><stop offset="1" stop-color="#2F5676"/>
+              </radialGradient>
+            </defs>
+            <path d="M50 88C24 69 3 53 3 30 3 14 15 3 29 3c9 0 16 5 21 12 5-7 12-12 21-12 14 0 26 11 26 27 0 23-21 39-47 58z" fill="url(#wax)"/>
+            <path d="M50 78C29 63 12 50 12 31 12 19 21 11 31 11c8 0 14 5 19 12 5-7 11-12 19-12 10 0 19 8 19 20 0 19-17 32-38 47z" fill="none" stroke="#E3EEF6" stroke-opacity=".45" stroke-width="1.4"/>
+            <path d="M50 81C28 65 10 51 10 31" fill="none" stroke="#1F3F5A" stroke-opacity=".3" stroke-width="1.2" transform="translate(1.2,1.4)"/>
+            <g id="mono" class="mono"><text id="m-j" x="30" y="56">J</text><text id="m-a" x="46" y="54" font-size="19">&amp;</text><text id="m-s" x="56" y="56">S</text></g>
+          </svg>
+        </div>
+      </div>
+    </button>
+    <div class="stage" id="stage"></div>
+  </div>
+
+  <p class="hint" id="hint"><span class="dot"></span>Tap the seal to open</p>
+
+  <div class="details" id="details" hidden>
+    <div class="when" id="d-date">Saturday, July 24, 2027</div>
+    <div class="where" id="d-place" hidden></div>
+    <div class="note" id="d-note">Formal invitation to follow</div>
+  </div>
+  <div class="actions" id="actions" hidden>
+    <a class="btn" id="site" href="#" target="_blank" rel="noopener">Visit our website</a>
+    <a class="btn ghost" id="cal" href="#" target="_blank" rel="noopener">Add to calendar</a>
+  </div>
+  <button class="replay" id="replay" type="button" hidden>Open it again</button>
+</main>
+
+<script>
+(function(){
+  const C = SAVE_THE_DATE;
+  const $ = id => document.getElementById(id);
+  const env=$('env'), slot=$('slot'), card=$('card'), stage=$('stage'), seal=$('seal');
+  const hint=$('hint'), actions=$('actions'), replay=$('replay');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- fill in the settings ----
+  $('c-eyebrow').textContent = C.eyebrow;
+  $('c-names').textContent = C.names;
+  $('c-date').textContent = C.dateShort;
+  $('env-names').textContent = C.envelopeNames;
+  $('d-date').textContent = C.dateLong;
+  $('d-note').textContent = C.note; $('d-note').hidden = !C.note;
+  if (C.place){ $('d-place').textContent = C.place; $('d-place').hidden = false; }
+
+  const url = (C.websiteUrl||'').trim();
+  [$('site')].forEach(a=>{
+    if (url){ a.href = url; a.textContent = 'Visit our website'; }
+    else { a.removeAttribute('href'); a.textContent = 'Website coming soon'; a.classList.add('soon'); a.setAttribute('aria-disabled','true'); }
+  });
+  $('cal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+    + '&text=' + encodeURIComponent(C.calendarTitle)
+    + '&dates=' + C.calendarStart + '/' + C.calendarEnd
+    + '&details=' + encodeURIComponent('Save the date! ' + C.note + (url ? '. ' + url : '.'))
+    + ((C.calendarLocation||C.place) ? '&location=' + encodeURIComponent(C.calendarLocation||C.place) : '');
+
+  // ---- opening sequence ----
+  let state = 'closed', anims = [];
+  const run = (el, frames, opts) => { const a = el.animate(frames, Object.assign({fill:'forwards'}, opts)); anims.push(a); return a; };
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  async function open(){
+    if (state !== 'closed') return;
+    state = 'opening';
+    hint.hidden = true;
+    env.setAttribute('aria-label','Opening the envelope');
+    if (reduce){ settle(); return; }
+
+    // 1. the seal lifts and lets go
+    run(seal, [
+      { transform:'translate(-50%,-50%) scale(1)', opacity:1 },
+      { transform:'translate(-50%,-58%) scale(1.12)', opacity:1, offset:.4 },
+      { transform:'translate(-50%,-70%) scale(.8)', opacity:0 }
+    ], { duration:520, easing:'ease-in-out' });
+
+    // 2. the flap folds back (CSS transition)
+    env.classList.add('open');
+    await wait(1150);
+
+    // 3. the card is drawn up and out while the envelope eases down
+    const cardH = card.offsetHeight, slotTop = slot.offsetTop;
+    const rise = slotTop + cardH + cardH * .06;
+    const drop = rise * .38;
+    run(card, [
+      { transform:'translateY(0)' },
+      { transform:`translateY(${-rise}px)` }
+    ], { duration:1000, easing:'cubic-bezier(.45,.05,.35,1)' });
+    await run(env, [
+      { transform:'translateY(0)' },
+      { transform:`translateY(${drop}px)` }
+    ], { duration:1000, easing:'cubic-bezier(.45,.05,.35,1)' }).finished;
+
+    // 4. clear of the envelope: hand the card to the stage without moving it, then settle it in front
+    const first = card.getBoundingClientRect();
+    anims.forEach(a => { if (a.effect.target === card) a.cancel(); });
+    stage.appendChild(card);
+    const last = card.getBoundingClientRect();
+    const dx = first.left - last.left, dy = first.top - last.top, s = first.width / last.width;
+    run(env, [
+      { transform:`translateY(${drop}px)`, opacity:1 },
+      { transform:`translateY(${drop + 50}px)`, opacity:0 }
+    ], { duration:650, easing:'ease-in' });
+    await run(card, [
+      { transform:`translate(${dx}px,${dy}px) scale(${s}) rotate(0deg)`, transformOrigin:'0 0' },
+      { transform:`translate(${dx*.35}px,${dy*.5}px) scale(${s + (1-s)*.6}) rotate(-1.4deg)`, transformOrigin:'0 0', offset:.55 },
+      { transform:'translate(0,0) scale(1) rotate(0deg)', transformOrigin:'0 0' }
+    ], { duration:1050, easing:'cubic-bezier(.3,.1,.25,1)' }).finished;
+    settle();
+  }
+
+  function settle(){
+    anims.forEach(a => a.cancel()); anims = [];
+    if (card.parentNode !== stage) stage.appendChild(card);
+    env.hidden = true;
+    actions.hidden = false; replay.hidden = false; $('details').hidden = false;
+    state = 'open';
+  }
+
+  function reset(){
+    anims.forEach(a => a.cancel()); anims = [];
+    env.classList.add('instant');
+    env.classList.remove('open');
+    slot.appendChild(card);
+    void env.offsetWidth;
+    env.hidden = false; hint.hidden = false; actions.hidden = true; replay.hidden = true; $('details').hidden = true;
+    env.setAttribute('aria-label','Open the envelope');
+    requestAnimationFrame(() => { env.classList.remove('instant'); state = 'closed'; env.focus(); });
+  }
+
+  // ---- center J & S by their actual ink inside the heart ----
+  function centerMono(){
+    const ctx = document.createElement('canvas').getContext('2d');
+    const parts = [['m-j','J',30],['m-a','&',19],['m-s','S',30]];
+    const gap = 1.2, target = { x:50, y:43 }, maxW = 50, maxH = 34;
+    const m = parts.map(([id,ch,size]) => {
+      ctx.font = size + 'px "Pinyon Script"';
+      const t = ctx.measureText(ch);
+      return { id, left:-t.actualBoundingBoxLeft, right:t.actualBoundingBoxRight, asc:t.actualBoundingBoxAscent, desc:t.actualBoundingBoxDescent };
+    });
+    // J and S share a baseline; the ampersand is centred on them
+    const mid = (-(m[0].asc) + m[0].desc + -(m[2].asc) + m[2].desc) / 4;
+    m[1].base = mid + (m[1].asc - m[1].desc) / 2; m[0].base = 0; m[2].base = 0;
+    let x = 0; m.forEach(p => { p.x = x - p.left; x += (p.right - p.left) + gap; });
+    const w = x - gap;
+    const top = Math.min(...m.map(p => p.base - p.asc)), bottom = Math.max(...m.map(p => p.base + p.desc));
+    const k = Math.min(1, maxW / w, maxH / (bottom - top));
+    const ox = target.x - (w / 2) * k, oy = target.y - ((top + bottom) / 2) * k;
+    m.forEach(p => { const el = $(p.id); el.setAttribute('x', p.x); el.setAttribute('y', p.base); });
+    $('mono').setAttribute('transform', `translate(${ox} ${oy}) scale(${k})`);
+  }
+  if (document.fonts){ document.fonts.load('30px "Pinyon Script"').then(centerMono, centerMono); } else centerMono();
+
+  env.addEventListener('click', open);
+  replay.addEventListener('click', reset);
+})();
+</script>
+
+</body>
+</html>
